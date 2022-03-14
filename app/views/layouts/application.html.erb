@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Teste Backend</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <%= nav_bar brand: "Teste Backend", brand_link: 'https://github.com/icasei/teste-backend' do %>
+      <%= menu_group do%>
+        <%= menu_item "Contatos",  root_url%>
+      <% end %>
+      <%= form_tag search_contact_path, method: :get, class:"navbar-form navbar-right" do %>
+        <div class="form-group">
+          <%= text_field_tag :name, @name, class:"form-control"  %>
+          <%= button_to  "Buscar", nil, class:"btn btn-default" %>
+        </div>
+      <%end%>
+  <%end%>
+  <div class="container">
+    <body>
+      <%= yield %>
+    </body>
+  </div>
+</html>
