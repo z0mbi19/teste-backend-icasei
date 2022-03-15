@@ -41,7 +41,8 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.0"
+gem 'redis'
+gem 'redis-rails'
 
 gem 'delivery_boy'
 gem 'wisper_kafka', '~> 0.1.0'
