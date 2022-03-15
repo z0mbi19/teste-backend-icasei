@@ -10,12 +10,12 @@
   </head>
   <%= nav_bar brand: "Teste Backend", brand_link: 'https://github.com/icasei/teste-backend' do %>
       <%= menu_group do%>
-        <%= menu_item "Contatos",  root_url%>
+        <%= menu_item "Contatcs",  root_url%>
       <% end %>
       <%= form_tag search_contact_path, method: :get, class:"navbar-form navbar-right" do %>
         <div class="form-group">
           <%= text_field_tag :name, @name, class:"form-control"  %>
-          <%= button_to  "Buscar", nil, class:"btn btn-default" %>
+          <%= button_to  "Search", nil, class:"btn btn-default" %>
         </div>
       <%end%>
   <%end%>
