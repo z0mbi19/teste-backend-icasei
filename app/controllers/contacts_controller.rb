@@ -76,7 +76,7 @@ class ContactsController < ApplicationController
     end
 
     def kafka_message
-      message = @contact.destroyed? ? @contact.as_json.to_json :  @contact.as_json.merge({destroyed: true}).to_json
+      message = @contact.destroyed? ? @contact.as_json.merge({destroyed: true}).to_json : @contact.as_json.to_json
       DeliveryBoy.deliver(message, topic: 'contacts_message')
     end
 end

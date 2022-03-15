@@ -10,6 +10,7 @@ services:
 
   kafka:
     image: confluentinc/cp-kafka:latest
+    container_name: kafka_broker
     networks: 
       - broker-kafka
     depends_on:
@@ -19,7 +20,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,EXTERNAL://127.0.0.1:9092,EXTERNAL2://127.0.0.1:9093,EXTERNAL3://127.0.0.1:9094,EXTERNAL4://127.0.0.1:9095
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,EXTERNAL://kafka:9092,EXTERNAL2://kafka:9093,EXTERNAL3://kafka:9094,EXTERNAL4://kafka:9095
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT,EXTERNAL2:PLAINTEXT,EXTERNAL3:PLAINTEXT,EXTERNAL4:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
@@ -37,6 +38,20 @@ services:
     environment:
       KAFKA_BROKERCONNECT: kafka:29092
 
-networks: 
+  rails:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: teste_backend_app
+    depends_on:
+      - zookeeper
+      - kafka
+      - kafdrop
+    networks: 
+      - broker-kafka
+    ports:
+      - 3000:3000
+
+networks:
   broker-kafka:
     driver: bridge
